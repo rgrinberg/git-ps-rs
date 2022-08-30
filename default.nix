@@ -1,9 +1,6 @@
-# default.nix
 { lib
 , naersk
 , stdenv
-, clangStdenv
-, hostPlatform
 , targetPlatform
 , pkg-config
 , libiconv
@@ -11,8 +8,6 @@
 , cargo
 , rustc
 , pkgs
-  # , llvmPackages # Optional
-  # , protobuf     # Optional
 }:
 
 let
@@ -27,7 +22,6 @@ naersk.lib."${targetPlatform.system}".buildPackage rec {
     pkg-config
     cargo
     rustc
-    libiconv
     pkgs.gpgme
     pkgs.openssl
   ];
@@ -38,20 +32,11 @@ naersk.lib."${targetPlatform.system}".buildPackage rec {
   RUST_BACKTRACE = "full";
   copyLibs = true;
 
-  # Optional things you might need:
-  #
-  # If you depend on `libclang`:
-  # LIBCLANG_PATH = "${llvmPackages.libclang}/lib";
-  #
-  # If you depend on protobuf:
-  # PROTOC = "${protobuf}/bin/protoc";
-  # PROTOC_INCLUDE = "${protobuf}/include";
-
   name = cargoToml.package.name;
   version = cargoToml.package.version;
 
   meta = with lib; {
-    description = cargoToml.package.description;
+    # description = cargoToml.package.description;
     homepage = cargoToml.package.homepage;
     license = with licenses; [ mit ];
     maintainers = with maintainers; [ ];

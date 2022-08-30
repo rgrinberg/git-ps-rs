@@ -1,6 +1,6 @@
 # flake.nix
 {
-  description = "My cute Rust crate!";
+  description = "Git Patch Stack";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
